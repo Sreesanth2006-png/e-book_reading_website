@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading - eBook Reader</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="reviews.js" defer></script>
+</head>
+<body id="reading-page">
+    <div class="container">
+        <h1 id="book-title">Reading</h1>
+        
+        <div class="reading-content">
+            <iframe id="book-content" width="100%" height="500px" src="" frameborder="0"></iframe>
+        </div>
+
+        <div class="navigation">
+            <button onclick="toggleFullScreen()">Full Screen</button>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="reviews-section">
+            <h2>Reviews</h2>
+            <div id="reviews-container"></div>
+            <textarea id="review-input" placeholder="Write your review..."></textarea>
+            <select id="rating-input">
+                <option value="">Rate this book</option>
+                <option value="1">1 Star</option>
+                <option value="2">2 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="5">5 Stars</option>
+            </select>
+            <button onclick="submitReview()">Submit Review</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to get the query parameter from the URL
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Load the correct book based on the query parameter
+        window.onload = function() {
+            const book = getQueryParameter('book');
+            const titleElement = document.getElementById('book-title');
+            const contentFrame = document.getElementById('book-content');
+
+            if (book) {
+                let pdfSrc;
+                switch (book) {
+                    case 'harry_potter':
+                        pdfSrc = 'books/Harry Potter and the Sorcerers Stone.pdf'; // Update with the correct path
+                        titleElement.textContent = "Reading: Harry Potter and the Philosopher's Stone";
+                        break;
+                    case 'sherlock_holmes':
+                        pdfSrc = 'books/advs.pdf'; // Update with the correct path
+                        titleElement.textContent = "Reading: The Adventures of Sherlock Holmes";
+                        break;
+                    case 'gullivers_travels':
+                        pdfSrc = 'books/gullivers-travels.pdf'; // Update with the correct path
+                        titleElement.textContent = "Reading: Gulliver's Travels";
+                        break;
+                    case 'theory_of_everything':
+                        pdfSrc = 'books/The-Theory-of-Everything.pdf-PDFDrive-.pdf'; // Update with the correct path
+                        titleElement.textContent = "Reading: The Theory of Everything";
+                        break;
+                    case 'To_Kill_a_Mockingbird':
+                        pdfsrc = 'books/mockingbird.pdf'
+                        titleElement.textContent = "Reading: To Kill a Mockingbird";
+                        break;
+                    default:
+                        titleElement.textContent = "Book not found!";
+                        return;
+                }
+                contentFrame.src = pdfSrc;
+
+                // Display reviews for the current book
+                displayReviews(book);
+            }
+        };
+
+        // Fullscreen toggle function
+        function toggleFullScreen() {
+            const elem = document.getElementById("book-content");
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { // IE/Edge
+                elem.msRequestFullscreen();
+            }
+        }
+    </script>
+</body>
+</html>

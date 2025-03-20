@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library - eBook Reader</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body id="library-page">
+    <div class="container">
+        <h1>eBook Library</h1>
+        
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" placeholder="Search for books..." id="search">
+            <button onclick="searchBooks()">Search</button>
+        </div>
+
+        <!-- Book Display Section -->
+        <div class="popular-novels">
+            <div class="novel">
+                <a href="reading.html?book=harry_potter">
+                    <img src="https://res.cloudinary.com/bloomsbury-atlas/image/upload/w_360,c_scale,dpr_1.5/jackets/9781408855652.jpg" alt="Novel 1 Cover">
+                    <p>HARRY POTTER AND THE PHILOSOPHER'S STONE</p>
+                </a>
+            </div>
+            <div class="novel">
+                <a href="reading.html?book=sherlock_holmes">
+                    <img src="https://m.media-amazon.com/images/I/71mTKQLmfQL._AC_UF1000,1000_QL80_.jpg" alt="Novel 2 Cover">
+                    <p>THE ADVENTURES OF SHERLOCK HOLMES</p>
+                </a>
+            </div>
+            <div class="novel">
+                <a href="reading.html?book=gullivers_travels">
+                    <img src="https://cdn.kobo.com/book-images/6f8ed772-5abb-4904-a5f5-0bedb2e87591/353/569/90/False/gulliver-s-travels-269.jpg" alt="Novel 3 Cover">
+                    <p>GULLIVER'S TRAVELS</p>
+                </a>
+            </div>
+            <div class="novel">
+                <a href="reading.html?book=theory_of_everything">
+                    <img src="https://m.media-amazon.com/images/I/612aQQorwWL._AC_UF1000,1000_QL80_.jpg" alt="Novel 4 Cover">
+                    <p>THE THEORY OF EVERYTHING</p>
+                </a>
+            </div>
+            <div class="popular-novels">
+                <div class="novel">
+                    <a href="reading.html?book=to_kill_a_mockingbird">
+                        <img src="https://res.cloudinary.com/bloomsbury-atlas/image/upload/w_360,c_scale,dpr_1.5/jackets/9781408855652.jpg" alt="Novel 1 Cover">
+                        <p>TO KILL A MOCKINGBIRD</p>
+                    </a>
+                </div>
+        </div>
+    </div>
+
+    <script>
+        function searchBooks() {
+            const query = document.getElementById('search').value.toLowerCase();
+            const novels = document.querySelectorAll('.novel');
+
+            novels.forEach(novel => {
+                const title = novel.querySelector('p').textContent.toLowerCase();
+                novel.style.display = title.includes(query) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
